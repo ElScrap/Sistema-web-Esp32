@@ -1,18 +1,37 @@
+//libreria
 #include <Arduino.h>
-
-// put function declarations here:
-int myFunction(int, int);
-
+#include <ArduinoJson.h>
+#include <SPIFFS.h>
+// Archivos *hpp - Fragmentar el Codigo
+#include "configuracion.hpp"
+#include "functions.hpp"
+#include "configuracionReset.hpp"
+#include "configuracionRead.hpp"
+#include "configuracionSave.hpp"
+#include "esp32_wifi.hpp"
+//Setup
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200);//velocidad
+  setCpuFrequencyMhz(240);//frecuencia de CPU
+  log("\nInfo: Iniciando Setup");//inicio del log por serial
+  configPines();//configurar los pines
+  if (!SPIFFS.begin(true))//chequeo incio de SPIFFS
+  {
+    log(F("Error: Falló la inicialización del SPIFFS"));
+    while(true);
+  }
+  configuracionReadWIFI();//leer configuracion wifi
+  WiFi.disconnect(true);//configuracion wifi
+  delay(1000);
+  wifi_setup();//setup del wifi
 }
+void loop() {// Loop Pincipal Nucleo 0
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    yield();
+    // WIFI para que 
+    if (wifi_mode == WIFI_STA){
+        wifiLoop();
+    }else if (wifi_mode == WIFI_AP){
+        wifiAPLoop();
+    } 
 }
