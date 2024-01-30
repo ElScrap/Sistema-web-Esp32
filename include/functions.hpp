@@ -1,7 +1,18 @@
 #include "ledBlink.hpp"
+// Sensor Temp Interno CPU
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+    uint8_t temprature_sens_read();
+#ifdef __cplusplus
+}
+#endif
+uint8_t temprature_sens_read();
+
 //Genera un log en el puerto serial
 void log(String s){
-    Serial.print(s);
+    Serial.println(s);
 }
 //Definir la plataforma
 String platform(){
@@ -45,14 +56,47 @@ String idUnique(){
 String deviceID(){
     return String(platform()) + hexStr(ESP.getEfuseMac()) + String(idUnique());
 }
-//C onfigurar los pines de salida
+//Configurar los pines de salida
 void configPines(){
    pinMode(WIFILED, OUTPUT);
     pinMode(MQTTLED, OUTPUT);
     pinMode(RELAY1, OUTPUT);  
     pinMode(RELAY2, OUTPUT); 
-    digitalWrite(RELAY1, LOW);
-    digitalWrite(RELAY2, LOW);    
-    digitalWrite(MQTTLED, LOW);    
-    digitalWrite(WIFILED, LOW);
+    //Los iniciamos en nivel bajo
+    ledApagado(RELAY1);
+    ledApagado(RELAY2);    
+    ledApagado(MQTTLED);    
+    ledApagado(WIFILED);
+}
+// Parpadeo LED MQTT Transmisión
+void mqttTX(){ 
+    for (int i = 0; i < 2; i++){
+        ledEncendido(MQTTLED);
+        delay(50);
+        ledApagado(MQTTLED);
+        delay(10);
+    }  
+}
+// Parpadeo LED MQTT Recepción
+void mqttRX(){
+    for (int i = 0; i < 1; i++){
+        blinkRandomSingle(5,50,MQTTLED);
+        delay(5);
+    }
+}
+// Retorna la calidad de señal WIFI en %
+int getRSSIasQuality(int RSSI){
+    int quality = 0;
+    if(RSSI <= -100){
+        quality = 0;
+    } else if(RSSI >= -50){
+        quality = 100;
+    } else{
+       quality = 2 * (RSSI + 100); 
+    }
+    return quality;
+}
+// Retorna la temperatura del CPU
+float TempCPUValue (){
+    return temp_cpu = (temprature_sens_read() - 32) / 1.8;
 }

@@ -24,5 +24,16 @@ char ap_passw[63];
 int ap_canal;
 int ap_hidden;
 int ap_connet;
-//Zona Otros
+// Zona MQTT
+boolean mqtt_enable;                // Habilitar MQTT Broker
+char    mqtt_user[30];              // Usuario MQTT Broker 
+char    mqtt_id[30];                // ID MQTT Broker       
+char    mqtt_passw[30];             // Password MQTT Broker 
+char    mqtt_server[39];            // Servidor del MQTT Broker
+int     mqtt_port;                  // Puerto servidor MQTT Broker
+int     mqtt_time;                  // Tiempo de envio por MQTT
+// Zona Otros
 uint8_t ip[4];
+float   temp_cpu;                   // Temperatura del CPU en °C
+// Zona Reles
+bool Relay01_status, Relay02_status; // Estados de los reles de salida
