@@ -1,7 +1,15 @@
-// Leer comentarios WIFI
+/* -------------------------------------------------------------------
+ * Elaborado por: Leonardo Aguilar
+ * Correo: leonardo-aguilar@hotmail.es
+ * Plataforma ESP32-Web
+ * Sistema Web para la gestion de dispositivos IoT y Moviles
+ * V1.0.0-2024
+ * -------------------------------------------------------------------
+*/
+// Leer Configuraciones de los parametros WIFI
 boolean configuracionReadWIFI()
 {
-    StaticJsonDocument<500> jsonConfig;
+    StaticJsonDocument<capacitywifi> jsonConfig;
     File file = SPIFFS.open("/ConfigWIFI.json", "r");
     if (deserializeJson(jsonConfig, file))
     {
@@ -37,7 +45,7 @@ boolean configuracionReadWIFI()
 boolean settingsReadMQTT(){
 
     // StaticJsonDocument<384> jsonConfig;
-    StaticJsonDocument<500> jsonConfig;
+    StaticJsonDocument<capacitymqtt> jsonConfig;
 
     File file = SPIFFS.open(F("/ConfigMQTT.json"), "r");
     if (deserializeJson(jsonConfig, file)){
@@ -61,7 +69,7 @@ boolean settingsReadMQTT(){
 }
 // Estados de los reles
 boolean configuracionReadRelays(){
-     StaticJsonDocument<200> jsonConfig;
+     StaticJsonDocument<capacityrele> jsonConfig;
     File file = SPIFFS.open("/Configrelays.json", "r");
     if (deserializeJson(jsonConfig, file)){
         // Si falla la lectura inicia valores por defecto
@@ -75,4 +83,23 @@ boolean configuracionReadRelays(){
         log("Info: Lectura de los Relay correcta");
         return true;
     } 
+}
+// Leer www_username/password
+boolean settingsReadUsuario(){
+    // Lee el Usuario y Contraseña
+    StaticJsonDocument<capacityadmin> jsonConfig;
+    File file = SPIFFS.open("/Configusuario.json", "r");
+    if (deserializeJson(jsonConfig, file)){
+        // Si falla la lectura inicia valores por defecto
+        settingsResetUsuario();
+        log("Error: Falló la lectura del Usuario y Contraseña, tomando valores por defecto");
+        return false;
+    }else{
+        /* ---------- Usuario y Contraseña ------------ */
+        strlcpy(www_username, jsonConfig["www_username"], sizeof(www_username));
+        strlcpy(www_password, jsonConfig["www_password"], sizeof(www_password));
+        file.close();
+        log("Info: Lectura del Usuario y Contraseña correcta");
+        return true;
+    }
 }

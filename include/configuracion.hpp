@@ -1,8 +1,25 @@
+/* -------------------------------------------------------------------
+ * Elaborado por: Leonardo Aguilar
+ * Correo: leonardo-aguilar@hotmail.es
+ * Plataforma ESP32-Web
+ * Sistema Web para la gestion de dispositivos IoT y Moviles
+ * V1.0.0-2024
+ * -------------------------------------------------------------------
+*/
 // Definiciones
 #define RELAY1 27
 #define RELAY2 26
 #define WIFILED 12
 #define MQTTLED 13
+//Capacidad de JSON
+const size_t capacitywifi = JSON_OBJECT_SIZE(16)+424;
+const size_t capacitymqtt = JSON_OBJECT_SIZE(7)+166;
+const size_t capacityrele = JSON_OBJECT_SIZE(2)+30;
+const size_t capacityadmin = JSON_OBJECT_SIZE(2)+42;
+// Versión de Firmware desde las variables de entorno platformio.ini
+#define TEXTIFY(A) #A
+#define ESCAPEQUOTE(A) TEXTIFY(A)
+String currentfirmware = ESCAPEQUOTE(BUILD_TAG);
 // Version de Hardware
 #define HW "ADMINESP32 v1"
 // Zona WIFI
@@ -37,3 +54,6 @@ uint8_t ip[4];
 float   temp_cpu;                   // Temperatura del CPU en °C
 // Zona Reles
 bool Relay01_status, Relay02_status; // Estados de los reles de salida
+// Zona www_username & www_password
+char www_username[15];              // Usuario para acceso al servidor Web
+char www_password[15];              // Contraseña del usuario servidor Web

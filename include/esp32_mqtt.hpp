@@ -1,3 +1,11 @@
+/* -------------------------------------------------------------------
+ * Elaborado por: Leonardo Aguilar
+ * Correo: leonardo-aguilar@hotmail.es
+ * Plataforma ESP32-Web
+ * Sistema Web para la gestion de dispositivos IoT y Moviles
+ * V1.0.0-2024
+ * -------------------------------------------------------------------
+*/
 #include <PubSubClient.h>
 WiFiClient espClient;
 PubSubClient mqttclient(espClient);
@@ -121,7 +129,6 @@ void mqttLoop()
 {
   if (mqtt_enable)
   {
-
     if (!mqttclient.connected())
     {
       long now = millis();
@@ -142,7 +149,7 @@ void mqttLoop()
       // if MQTT conectada
       mqttclient.loop();
       // Poner en Apagado el Led del MQTT
-      ledApagado(MQTTLED);
+      //ledApagado(MQTTLED);
     }
   }
 }

@@ -2,6 +2,8 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <SPIFFS.h>
+#include <TimeLib.h>
+
 // Archivos *hpp - Fragmentar el Codigo
 #include "configuracion.hpp"
 #include "functions.hpp"
@@ -10,6 +12,10 @@
 #include "configuracionSave.hpp"
 #include "esp32_wifi.hpp"
 #include "esp32_mqtt.hpp"
+#include "esp32_api.hpp"
+#include "esp32_websocket.hpp"
+#include "esp32_server.hpp"
+
 //Setup
 void setup() {
   Serial.begin(115200);//velocidad
@@ -21,15 +27,36 @@ void setup() {
     log(F("Error: Falló la inicialización del SPIFFS"));
     while(true);
   }
-  configuracionReadRelays();//leer los estados de los relays
+  //leer los estados de los relays
+  if(!configuracionReadRelays()){
+        //salvar estados de los relays
+        settingsSaveRelays();
+  }
   ledEncendidoApagado(RELAY1,Relay01_status);//Paso estados a los pines de rele
   ledEncendidoApagado(RELAY2,Relay02_status);//Paso estados a los pines de rele
-  configuracionReadWIFI();//leer configuracion wifi
+  //leer configuracion wifi
+  if(!configuracionReadWIFI()){        
+    // Salvar las configuraciones del WIFI
+    configuracionSaveWiFi();
+  }
+  bootCount++;  //Incrementar el contador de reinicios
+  configuracionSaveWiFi();//Salvar las configuraciones del WiFi
   WiFi.disconnect(true);//configuracion wifi
   delay(1000);
   wifi_setup();//setup del wifi
   //lee la configuracion mqtt
-  settingsReadMQTT();
+  if(!settingsReadMQTT()){
+    // Salvar la configuracion del MQTT
+    settingsSaveMQTT();
+  } 
+  //leer usuario y contras
+  if(!settingsReadUsuario()){
+    // Salvar el usuario y Contraseña
+    settingsSaveAdmin();
+  }  
+  InitServer(); //Inicializar el servidor
+  //listDir(SPIFFS,"/",0);// Devuelve la lista de carpetas y archivos del SPIFFS ONLYDEBUG
+  log("Info: Setup Completado");
 }
 // Loop Pincipal Nucleo 0
 void loop() {

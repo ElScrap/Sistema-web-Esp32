@@ -2,27 +2,26 @@
 <html lang="es">
   <!-- BEGIN HEAD-->
   <head>
-    <meta charset="UTF-8" />
-    <title>Admin | ESP32</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="Leonardo Aguilar" name="author" />
+    <meta charset="UTF-8"/>
+    <title>Admin | General</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="Leonardo Aguilar" name="author"/>
     <!-- FAVICON ICONS -->
-    <link rel="icon" href="portada_iot.jpg" type="image/x-icon">
+    <link rel="icon" href="www/portada_iot.jpg" type="image/x-icon">
     <!-- GLOBAL STYLES -->
-    <link rel="stylesheet" href="bootstrap.css" />
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="theme.css" />
-    <link rel="stylesheet" href="MoneAdmin.css" />
-    <link rel="stylesheet" href="bootstrap-switch.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="www/bootstrap.css"/>
+    <link rel="stylesheet" href="www/main.css"/>
+    <link rel="stylesheet" href="www/theme.css"/>
+    <link rel="stylesheet" href="www/MoneAdmin.css"/>
+    <link rel="stylesheet" href="www/bootstrap-switch.css"/>
+    <link rel="stylesheet" href="www/styles.css"/>
     <link
       rel="stylesheet"
-      href="font-awesome.css"
-    />
+      href="www/font-awesome.css"/>
     <!--END GLOBAL STYLES -->
     <!-- PAGE LEVEL STYLES -->
-    <link href="layout2.css" rel="stylesheet" />
+    <link href="www/layout2.css" rel="stylesheet"/>
     <!-- END PAGE LEVEL  STYLES -->
   </head>
   <!-- END  HEAD-->
@@ -32,10 +31,7 @@
     <div id="wrap">
       <!-- HEADER SECTION -->
       <div id="top">
-        <nav
-          class="navbar navbar-inverse navbar-fixed-top"
-          style="padding-top: 10px"
-        >
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="padding-top: 10px">
           <a
             data-original-title="Show/Hide Menu"
             data-placement="bottom"
@@ -43,14 +39,12 @@
             class="accordion-toggle btn btn-primary btn-sm visible-xs"
             data-toggle="collapse"
             href="#menu"
-            id="menu-toggle"
-          >
-            <i class="icon-align-justify"></i>
+            id="menu-toggle" ><i class="icon-align-justify"></i>
           </a>
           <!-- LOGO SECTION -->
           <header class="navbar-header">
-            <a href="index.html" class="navbar-brand">
-                <!--<img src="portada.png" alt="" width="150" height="50" /></a>-->
+            <a href="/" class="navbar-brand">
+                <!--<img src="portada.png" alt="" width="150" height="50"/></a>-->
                 <b><span style="color: rgb(0, 110, 255);">Bienvenido al Sistema de IoT</span></b>
            </header>
           <!-- END LOGO SECTION -->
@@ -62,13 +56,9 @@
                 <i class="icon-chevron-down"></i>
               </a>
               <ul class="dropdown-menu dropdown-user">
-                <li>
-                  <a href="esp-admin"><i class="icon-user"></i> Usuario </a>
-                </li>
+                <li><a href="esp-admin"><i class="icon-user"></i> Usuario </a></li>
                 <li class="divider"></li>
-                <li>
-                  <a href="esp-logout"><i class="icon-signout"></i> Salir </a>
-                </li>
+                <li><a href="esp-logout"><i class="icon-signout"></i>Salir</a></li>
               </ul>
             </li>
             <!--END ADMIN SETTINGS -->
@@ -80,33 +70,26 @@
       <div id="left">
         <div class="media user-media well-small">
           <a class="user-link" href="/">
-            <img
-              class="media-object img-thumbnail user-img"
-              alt="User Picture"
-              src="portada_iot.jpg"
-              width="90"
-            />
+            <img class="media-object img-thumbnail user-img" alt="User Picture" src="www/portada_iot.jpg" width="90"/>
           </a>
-          <br />
+          <br/>
           <div class="media-body">
-            <h5 class="media-heading">ESP32</h5>
+            <h5 class="media-heading">#platform#</h5>
             <ul class="list-unstyled user-info">
-              <li><a class="btn btn-success btn-xs btn-circle" style="width: 10px; height: 12px"></a>
-                Online </li>
+              <li><a class="btn btn-success btn-xs btn-circle" style="width: 10px; height: 12px"></a>Online </li>
             </ul>
           </div>
-          <br />
+          <br/>
         </div>
-
         <ul id="menu" class="collapse">
           <li class="panel active">
             <a href="/"> <i class="icon-th-large"></i> DASHBOARD </a>
           </li>
           <li class="panel">
-            <a href="wifi.html"> <i class="icon-signal"></i> WIFI </a>
+            <a href="esp-wifi"> <i class="icon-signal"></i> WIFI </a>
           </li>
           <li class="panel">
-            <a href="mqtt.html"> <i class="icon-sitemap"></i> MQTT </a>
+            <a href="esp-mqtt"> <i class="icon-sitemap"></i> MQTT </a>
           </li>
           <li class="panel">
             <a
@@ -114,25 +97,19 @@
               data-parent="#menu"
               data-toggle="collapse"
               class="accordion-toggle"
-              data-target="#component-nav"
-            >
-              <i class="icon-cog"> </i> ADMINISTRAR
-
-              <span class="pull-right">
-                <i class="icon-angle-left"></i>
-              </span>
+              data-target="#component-nav">
+              <i class="icon-cog"> </i> ADMINISTRAR<span class="pull-right"><i class="icon-angle-left"></i></span>
             </a>
             <ul class="collapse" id="component-nav">
-              <li class=""><a href="dispositivo.html"><i class="icon-angle-right"></i>Dispositivo</a></li>
-              <li class=""><a href="restablecer.html"><i class="icon-angle-right"></i>Restablecer de Fabrica</a></li>
-              <li class=""><a href="reiniciar.html"><i class="icon-angle-right"></i>Reincio</a></li>
-              <li class=""><a href="usuario.html"><i class="icon-angle-right"></i>Usuarios</a></li>
+              <li class=""><a href="esp-dispositivo"><i class="icon-angle-right"></i>Dispositivo</a></li>
+              <li class=""><a href="esp-restablecer"><i class="icon-angle-right"></i>Restablecer de Fabrica</a></li>
+              <li class=""><a href="esp-reiniciar"><i class="icon-angle-right"></i>Reincio</a></li>
+              <li class=""><a href="esp-usuario"><i class="icon-angle-right"></i>Usuarios</a></li>
             </ul>
           </li>
           <li class="panel">
             <a href="esp-logout"> <i class="icon-signout"></i> SALIR </a>
           </li>
-          
         </ul>
       </div>
       <!--END MENU SECTION -->
@@ -150,79 +127,75 @@
               <div style="text-align: center">
                 <a class="quick-btn" href="#">
                   <i class="icon-info-sign icon-2x"></i>
-                  <span> Dispositivo</span>
-                  <span class="label label-danger">ESP32</span>
+                  <span>Dispositivo</span>
+                  <span class="label label-danger">#platform#</span>
                 </a>
-
                 <a class="quick-btn" href="#">
                   <i class="icon-signal icon-2x"></i>
                   <span>WIFI RSSI</span>
-                  <span class="label label-success">-66 dBm</span>
+                  <span class="label label-success">#wifi_dbm#</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-sitemap icon-2x"></i>
                   <span>MQTT</span>
-                  <span class="label label-warning">Online</span>
+                  <span class="label label-warning">#mqtt_on#</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-fire icon-2x"></i>
                   <span>Temp. CPU</span>
-                  <span class="label btn-metis-2">20.5 °C</span>
+                  <span class="label btn-metis-2">#temp_cpu#</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-retweet icon-2x"></i>
                   <span>Reinicios</span>
-                  <span class="label btn-metis-4">9</span>
+                  <span class="label btn-metis-4">#bootCount#</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-time icon-2x"></i>
                   <span>Tiempo Activo</span>
-                  <span class="label label-default">1:13:22:10</span>
+                  <span class="label label-default">#time_active#</span>
                 </a>
               </div>
             </div>
           </div>
           <!--END BLOCK SECTION -->
-          <hr />
+          <hr/>
           <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                   <i class="icon-info-sign "></i> Información General
-                  <span class="badge pull-right" style="background-color: #ffffff; color: #000000;">adminEsp32 / 123456789</span>
+                  <span class="badge pull-right" style="background-color: #ffffff; color: #000000;">#id# / #serie#</span>
                 </div>
                 <div class="panel-body">
                     <h3>Inalambrico</h3>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado WiFi:</span> <span id="wifi_status"><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">CONECTADO</span></span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Red WiFi:</span> <span id="wifi_status" >Mi house</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">IP WiFi:</span> <span id="wifi_status" >192.168.0.0</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Mac WiFi:</span> <span id="wifi_status">00.0.00</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RSSI WiFi:</span> <span id="wifi_status">sadasd</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Señal WiFi:</span> <span id="wifi_status">asdasd %</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado WiFi:</span> <span ><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">#wifi_status#</span></span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">SSID WiFi:</span> <span>#wifi_ssid#</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">IP WiFi:</span> <span>#wifi_ip#</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Mac WiFi:</span> <span>#wifi_mac#</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RSSI WiFi:</span> <span>#wifi_dbm# dBm</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Calidad Señal WiFi:</span> <span>#wifi_percent# %</span></div>
                     <hr>
                     <h3>Broker MQTT</h3>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado MQTT:</span> <span id="wifi_status"><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">CONECTADO</span></span></div>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Servidor MQTT:</span> <span id="wifi_status">Mi house</span></div>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Usuario MQTT:</span> <span id="wifi_status">192.168.0.0</span></div>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Cliente ID MQTT:</span> <span id="wifi_status">192.168.0.0</span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado MQTT:</span> <span><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">#mqtt_status#</span></span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Servidor MQTT:</span> <span>#mqtt_server#</span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Usuario MQTT:</span> <span>#mqtt_user#</span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Cliente ID MQTT:</span> <span>#mqtt_id#</span></div>
                     <hr>
-                    <h3>Información General</h3>
-                                         
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Identificación:</span><span id="identificador"> Esp32</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Número de Serie:</span> <span>9B1C5210CE0C3D</span></div>
-                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">mDNS Url:</span> <a href="http://esp32.electroniciot.com/" target="_blank" id="mdns">leonardo</a></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Dirección IP Cliente:</span> <span> 157.100.105.167 from <span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">Ecuador</span> </span> </div>
-                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Navegador Cliente:</span> <span>Mozilla/5.0 (Windows NT10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Versión Firmware:</span>
-                          <span>v5.0.0-Build-20220119 - Online</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">SDK:</span> <span>v3.3.5-1-g85c43024c</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Versión Hardware :</span> <span>ADMINESP32 v1
-                              00000000 - Online</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">CPU FREQ:</span> <span>240 MHz</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RAM SIZE:</span> <span>341.27 KB</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">FLASH SIZE:</span> <span>4.00 MB</span></div>
+                    <h3>Información General</h3>                  
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Identificación:</span> <span>#id#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Número de Serie:</span> <span>#serie#</span></div>
+                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">mDNS Url:</span> <span>http://#id#.local/</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Dirección IP Cliente:</span> <span>#clientIP#</span> <span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">Ecuador</span></div>
+                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Navegador Cliente:</span> <span>#clientIP#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Versión Firmware:</span> <span>#firmware#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">SDK:</span> <span>#sdk#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Versión Hardware :</span> <span>#hardware#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">CPU FREQ:</span> <span>#cpu_freq# MHz</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RAM SIZE:</span> <span>#ram_size# KB</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">FLASH SIZE:</span> <span>#flash_size# MB</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Fabricante:</span> <span>ELECTRONIC IOT</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Tiem. Act. Sistema:</span> <span id="time_active"></span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">N° Reinicios:</span> <span id="restart_t"></span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Tiem. Act. Sistema:</span> <span>#time_active#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">N° Reinicios:</span> <span>#bootCount#</span></div>
                   </div>
             </div>
         </div>
@@ -232,23 +205,19 @@
       <!-- RIGHT STRIP  SECTION -->
       <div id="right">
         <div class="well well-small">
-          <span>SEÑAL WIFI</span><span class="pull-right"><small>20%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-info" style="width: 20%"></div></div>
-          <span>FLASH DISPONIBLE</span><span class="pull-right"><small>40%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-success" style="width: 40%"></div></div>
-          <span>RAM DISPONIBLE</span><span class="pull-right"><small>60%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-warning" style="width: 60%"></div></div>
+          <span>SEÑAL WIFI</span><span class="pull-right"><small>#wifi_percent#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-info" style="width: #wifi_percent#%"></div></div>
+          <span>FLASH DISPONIBLE</span><span class="pull-right"><small>#flash_available#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-success" style="width: #flash_available#%"></div></div>
+          <span>RAM DISPONIBLE</span><span class="pull-right"><small>#ram_available#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-warning" style="width: #ram_available#%"></div></div>
         </div> 
         <div class="well well-small">
-          <span>Relay 01</span><span class="pull-right success"><small class="label label-success" id="relay1status">Activado</small></span>
-            <div class="make-switch" data-on="primary" data-off="info">
-              <input type="checkbox" id="relay1" checked="checked">
-          </div>
+          <span>Relay 01</span><span class="pull-right success"><small class="label #label1#">#Statustext1#</small></span>
+          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" #relay1#></div>
           <br><br>
-          <span>Relay 02</span><span class="pull-right success"><small class="label label-success" id="relay1status">Activado</small></span>
-            <div class="make-switch" data-on="primary" data-off="info">
-              <input type="checkbox" id="relay1" checked="checked">
-          </div>
+          <span>Relay 02</span><span class="pull-right success"><small class="label #label2#">#Statustext2#</small></span>
+          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" #relay2#></div>
         </div>
       </div>
       <!-- END RIGHT STRIP  SECTION -->
@@ -260,12 +229,11 @@
     </div>
     <!--END FOOTER -->
     <!-- GLOBAL SCRIPTS -->
-    <script src="jquery-2.0.3.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="modernizr-2.6.2.min.js"></script>
-    <script src="bootstrap-switch.min.js"></script>
-    
-    <script src="script.js"></script>
+    <script src="www/jquery-2.0.3.min.js"></script>
+    <script src="www/bootstrap.min.js"></script>
+    <script src="www/modernizr-2.6.2.min.js"></script>
+    <script src="www/bootstrap-switch.min.js"></script>
+    <script src="www/scripts.js"></script>
     <!-- END GLOBAL SCRIPTS -->
   </body>
   <!-- END BODY-->

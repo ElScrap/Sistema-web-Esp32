@@ -1,3 +1,11 @@
+/* -------------------------------------------------------------------
+ * Elaborado por: Leonardo Aguilar
+ * Correo: leonardo-aguilar@hotmail.es
+ * Plataforma ESP32-Web
+ * Sistema Web para la gestion de dispositivos IoT y Moviles
+ * V1.0.0-2024
+ * -------------------------------------------------------------------
+*/
 #include "ledBlink.hpp"
 // Sensor Temp Interno CPU
 #ifdef __cplusplus
@@ -21,10 +29,30 @@ String platform(){
         return "ESP32XXX";
     #endif
 }
-//$Recycle.Bin
+//Convierte un char a IP
 IPAddress CharToIP(const char *str){
     sscanf(str,"%hhu.%hhu.%hhu.%hhu", &ip[0], &ip[1], &ip[2], &ip[3]);
     return IPAddress(ip[0],ip[1],ip[2],ip[3]);
+}
+// Retorna segundos como "d:hh:mm:ss"
+String longTimeStr(const time_t &t){        
+    String s = String(t / SECS_PER_DAY) + ':';
+    if (hour(t) < 10)
+    {
+        s += '0';
+    }
+    s += String(hour(t)) + ':';
+    if (minute(t) < 10)
+    {
+        s += '0';
+    }
+    s += String(minute(t)) + ':';
+    if (second(t) < 10)
+    {
+        s += '0';
+    }
+    s += String(second(t));
+    return s;
 }
 //Convertidor de Ip a string
 String ipStr(const IPAddress &ip){
@@ -52,6 +80,8 @@ String idUnique(){
     snprintf(idunique, 15, "%04X", chip);
     return idunique;
 }
+// ID del Dispositivo para La Base de Datos
+const String device_id = hexStr(ESP.getEfuseMac()) + "LI" + String(idUnique()); 
 // ID del Dispositivo para La Base de Datos
 String deviceID(){
     return String(platform()) + hexStr(ESP.getEfuseMac()) + String(idUnique());
@@ -84,6 +114,17 @@ void mqttRX(){
         delay(5);
     }
 }
+// Parpadeo de los LEDs WIFI & MQTT
+void leds(){
+    for(int i=0; i < 4; i++) { 
+        ledEncendido(MQTTLED);
+        ledEncendido(WIFILED);
+        delay(100);
+        ledApagado(MQTTLED);
+        ledApagado(WIFILED);
+        delay(100);
+    }
+}
 // Retorna la calidad de señal WIFI en %
 int getRSSIasQuality(int RSSI){
     int quality = 0;
@@ -99,4 +140,143 @@ int getRSSIasQuality(int RSSI){
 // Retorna la temperatura del CPU
 float TempCPUValue (){
     return temp_cpu = (temprature_sens_read() - 32) / 1.8;
+}
+// Retorna el listado de todos los archivos en el SPIFFS
+void listDir(fs::FS &fs, const char * dirname, uint8_t levels){
+    Serial.printf("Listado de Directorio: %s\r\n", dirname);
+
+    File root = fs.open(dirname);
+    if(!root){
+        log("- No se pudo abrir el directorio");
+        return;
+    }
+    if(!root.isDirectory()){
+        log(" - No es un directorio");
+        return;
+    }
+
+    File file = root.openNextFile();
+    while(file){
+        if(file.isDirectory()){
+            log("  DIR : " + String(file.name()));
+            if(levels){
+                listDir(fs, file.name(), levels -1);
+            }
+        } else {
+            log("  ARCHIVO : " + String(file.name()));
+            log("\tTAMAÑO : " + String(file.size()));
+        }
+        file = root.openNextFile();
+    }
+    log("  Total Espacio: " + String(SPIFFS.totalBytes()));
+    log("  Total Espacio Usado:  " + String(SPIFFS.usedBytes()));
+}
+//Convierte un char a ip
+IPAddress StrIP(const char *str){
+    sscanf(str, "%hhu.%hhu.%hhu.%hhu", &ip[0], &ip[1], &ip[2], &ip[3]);
+    return IPAddress(ip[0], ip[1], ip[2], ip[3]);
+}
+// Nos Devuelve un String con el SweetAlert2
+
+String SweetAlert(String TitleWeb, String SweetTitle, String SweetText, String SweetIcon, String type){
+    String SweetAlert;
+    if(type == "aviso"){
+        SweetAlert = "<head>"
+                        "<html><meta charset='UTF-8'>"
+                        "<title>AdminTools | "+ TitleWeb +"</title>"
+                        "<meta content='width=device-width, initial-scale=1.0' name='viewport' />"
+                        "<link rel='icon' href='www/esp32.png' type='image/x-icon'>"
+                        "<link rel='stylesheet' href='www/bootstrap.css' />"
+                        "<link rel='stylesheet' href='www/main.css' />"
+                        "<link rel='stylesheet' href='www/MoneAdmin.css' />"
+                        "<link rel='stylesheet' href='www/font-awesome.css' />"
+                        "<link rel='stylesheet' href='www/sweetalert2.min.css' />"
+                        "<script src='www/jquery-2.0.3.min.js'></script>"
+                        "<script src='www/bootstrap.min.js'></script>"
+                        "<script src='www/modernizr-2.6.2.min.js'></script>"
+                        "<script src='www/sweetalert2.min.js'></script>"
+                    "</head>"
+                    "<body>"
+                    "<script>"
+                        "Swal.fire({title: '"+SweetTitle+"!',"
+                                        " text: '"+SweetText+"',"
+                                        " icon: '"+SweetIcon+"',"
+                                        " confirmButtonText: 'Cerrar'}).then((result) => {"
+                                        "if (result.isConfirmed){"
+                                            "history.back();"
+                                        "};"
+                                    "})"
+                    "</script>"
+                    "<body>"
+                    "</html>";
+    }else if(type == "accion"){
+        SweetAlert = "<head>"
+                        "<html><meta charset='UTF-8'>"
+                        "<title>AdminTools | "+ TitleWeb +"</title>"
+                        "<meta content='width=device-width, initial-scale=1.0' name='viewport' />"
+                        "<link rel='icon' href='www/esp32.png' type='image/x-icon'>"
+                        "<link rel='stylesheet' href='www/bootstrap.css' />"
+                        "<link rel='stylesheet' href='www/main.css' />"
+                        "<link rel='stylesheet' href='www/MoneAdmin.css' />"
+                        "<link rel='stylesheet' href='www/font-awesome.css' />"
+                        "<link rel='stylesheet' href='www/sweetalert2.min.css' />"
+                        "<script src='www/jquery-2.0.3.min.js'></script>"
+                        "<script src='www/bootstrap.min.js'></script>"
+                        "<script src='www/modernizr-2.6.2.min.js'></script>"
+                        "<script src='www/sweetalert2.min.js'></script>"
+                    "</head>"
+                    "<body>"
+                    "<script>"
+                        "Swal.fire({title: '"+SweetTitle+"!',"
+                        " text: '"+SweetText+"',"
+                        " icon: '"+SweetIcon+"',"
+                        " showCancelButton: true,"
+                        " confirmButtonColor: '#3085d6',"
+                        " cancelButtonColor: '#d33',"
+                        " confirmButtonText: 'Si, reiniciar',"
+                        " cancelButtonText: 'Cancelar',"
+                        " reverseButtons: true"
+                        " }).then((result) => {"
+                                    "if (result.isConfirmed){"
+                                        "window.location = 'esp-reiniciar';"
+                                        "}else if ("
+                                        "result.dismiss === Swal.DismissReason.cancel"
+                                        "){"
+                                        "history.back();"
+                                        "}"
+                                    "})"
+                    "</script>"
+                    "<body>"
+                    "</html>";
+    }else{
+        SweetAlert = "<head>"
+                        "<html><meta charset='UTF-8'>"
+                        "<title>AdminTools | "+ TitleWeb +"</title>"
+                        "<meta content='width=device-width, initial-scale=1.0' name='viewport' />"
+                        "<link rel='icon' href='www/portada_iot.jpg' type='image/x-icon'>"
+                        "<link rel='stylesheet' href='www/bootstrap.css' />"
+                        "<link rel='stylesheet' href='www/main.css' />"
+                        "<link rel='stylesheet' href='www/MoneAdmin.css' />"
+                        "<link rel='stylesheet' href='www/font-awesome.css' />"
+                        "<link rel='stylesheet' href='www/sweetalert2.min.css' />"
+                        "<script src='www/jquery-2.0.3.min.js'></script>"
+                        "<script src='www/bootstrap.min.js'></script>"
+                        "<script src='www/modernizr-2.6.2.min.js'></script>"
+                        "<script src='www/sweetalert2.min.js'></script>"
+                    "</head>"
+                    "<body>"
+                    "<script>"
+                        "Swal.fire({title: '"+SweetTitle+"!',"
+                                        " text: '"+SweetText+"',"
+                                        " icon: '"+SweetIcon+"',"
+                                        " confirmButtonText: 'Cerrar'}).then((result) => {"
+                                        "if (result.isConfirmed){"
+                                            "window.location = '/';"
+                                        "};"
+                                    "})"
+                    "</script>"
+                    "<body>"
+                    "</html>";
+    }
+    return SweetAlert;
 }
