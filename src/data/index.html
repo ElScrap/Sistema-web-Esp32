@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="www/theme.css"/>
     <link rel="stylesheet" href="www/MoneAdmin.css"/>
     <link rel="stylesheet" href="www/bootstrap-switch.css"/>
+    <link rel="stylesheet" href="www/sweetalert2.min.css"/>
     <link rel="stylesheet" href="www/styles.css"/>
     <link
       rel="stylesheet"
@@ -133,17 +134,17 @@
                 <a class="quick-btn" href="#">
                   <i class="icon-signal icon-2x"></i>
                   <span>WIFI RSSI</span>
-                  <span class="label label-success">#wifi_dbm#</span>
+                  <span class="label label-success" id="dbm_label">#wifi_dbm# dBm</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-sitemap icon-2x"></i>
                   <span>MQTT</span>
-                  <span class="label label-warning">#mqtt_on#</span>
+                  <span class="label label-warning" id="mqtt_on">#mqtt_on#</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-fire icon-2x"></i>
                   <span>Temp. CPU</span>
-                  <span class="label btn-metis-2">#temp_cpu#</span>
+                  <span class="label btn-metis-2" id="temp_cpu">#temp_cpu# °C</span>
                 </a>
                 <a class="quick-btn" href="#">
                   <i class="icon-retweet icon-2x"></i>
@@ -153,7 +154,7 @@
                 <a class="quick-btn" href="#">
                   <i class="icon-time icon-2x"></i>
                   <span>Tiempo Activo</span>
-                  <span class="label label-default">#time_active#</span>
+                  <span class="label label-default" id="active">#time_active#</span>
                 </a>
               </div>
             </div>
@@ -168,23 +169,23 @@
                 </div>
                 <div class="panel-body">
                     <h3>Inalambrico</h3>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado WiFi:</span> <span ><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">#wifi_status#</span></span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado WiFi:</span> <span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;" id="wifi_status">#wifi_status#</span></div>
                     <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">SSID WiFi:</span> <span>#wifi_ssid#</span></div>
                     <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">IP WiFi:</span> <span>#wifi_ip#</span></div>
                     <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Mac WiFi:</span> <span>#wifi_mac#</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RSSI WiFi:</span> <span>#wifi_dbm# dBm</span></div>
-                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Calidad Señal WiFi:</span> <span>#wifi_percent# %</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RSSI WiFi:</span> <span id="wifi_dbm">#wifi_dbm# dBm</span></div>
+                    <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Calidad Señal WiFi:</span> <span id="wifi_percent">#wifi_percent# %</span></div>
                     <hr>
                     <h3>Broker MQTT</h3>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado MQTT:</span> <span><span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">#mqtt_status#</span></span></div>
-                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Servidor MQTT:</span> <span>#mqtt_server#</span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Estado MQTT:</span> <span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;" id="mqtt_status">#mqtt_status#</span></div>
+                    <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Servidor MQTT:</span> <span id="mqtt_server">#mqtt_server#</span></div>
                     <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Usuario MQTT:</span> <span>#mqtt_user#</span></div>
                     <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Cliente ID MQTT:</span> <span>#mqtt_id#</span></div>
                     <hr>
                     <h3>Información General</h3>                  
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Identificación:</span> <span>#id#</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Número de Serie:</span> <span>#serie#</span></div>
-                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">mDNS Url:</span> <span>http://#id#.local/</span></div>
+                      <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">mDNS Url:</span> <a href="http://#id#.local/" target="_blank">http://#id#.local/</a></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Dirección IP Cliente:</span> <span>#clientIP#</span> <span class="label label-success" style="width: 150px; height: 18px; font-size: 14px;">Ecuador</span></div>
                       <div><span class="label label-primary"style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Navegador Cliente:</span> <span>#clientIP#</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Versión Firmware:</span> <span>#firmware#</span></div>
@@ -194,7 +195,7 @@
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">RAM SIZE:</span> <span>#ram_size# KB</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">FLASH SIZE:</span> <span>#flash_size# MB</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Fabricante:</span> <span>ELECTRONIC IOT</span></div>
-                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Tiem. Act. Sistema:</span> <span>#time_active#</span></div>
+                      <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">Tiem. Act. Sistema:</span> <span id="time_active">#time_active#</span></div>
                       <div><span class="label label-primary" style="width: 150px; height: 18px; display: inline-flex; font-size: 14px;">N° Reinicios:</span> <span>#bootCount#</span></div>
                   </div>
             </div>
@@ -205,19 +206,19 @@
       <!-- RIGHT STRIP  SECTION -->
       <div id="right">
         <div class="well well-small">
-          <span>SEÑAL WIFI</span><span class="pull-right"><small>#wifi_percent#%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-info" style="width: #wifi_percent#%"></div></div>
-          <span>FLASH DISPONIBLE</span><span class="pull-right"><small>#flash_available#%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-success" style="width: #flash_available#%"></div></div>
-          <span>RAM DISPONIBLE</span><span class="pull-right"><small>#ram_available#%</small></span>
-          <div class="progress mini"><div class="progress-bar progress-bar-warning" style="width: #ram_available#%"></div></div>
+          <span>SEÑAL WIFI</span><span class="pull-right"><small id="wifi_label">#wifi_percent#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-info" id="wifi_Signal" style="width: #wifi_percent#%"></div></div>
+          <span>FLASH USADA</span><span class="pull-right"><small id="spiffs_label">#spiffs_used#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-success" id="spiffs_Signal" style="width: #spiffs_used#%"></div></div>
+          <span>RAM DISPONIBLE</span><span class="pull-right"><small id="ram_label">#ram_available#%</small></span>
+          <div class="progress mini"><div class="progress-bar progress-bar-warning" id="ram_Signal" style="width: #ram_available#%"></div></div>
         </div> 
         <div class="well well-small">
-          <span>Relay 01</span><span class="pull-right success"><small class="label #label1#">#Statustext1#</small></span>
-          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" #relay1#></div>
+          <span>Relay 01</span><span class="pull-right success"><small class="label #label1#" id="RELAY1_Status">#Statustext1#</small></span>
+          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" id="RELAY1" #relay1# onchange="relay(this);"></div>
           <br><br>
-          <span>Relay 02</span><span class="pull-right success"><small class="label #label2#">#Statustext2#</small></span>
-          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" #relay2#></div>
+          <span>Relay 02</span><span class="pull-right success"><small class="label #label2#" id="RELAY2_Status">#Statustext2#</small></span>
+          <div class="make-switch" data-on="primary" data-off="info"><input type="checkbox" id="RELAY2" #relay2# onchange="relay(this);"></div>
         </div>
       </div>
       <!-- END RIGHT STRIP  SECTION -->
@@ -233,6 +234,7 @@
     <script src="www/bootstrap.min.js"></script>
     <script src="www/modernizr-2.6.2.min.js"></script>
     <script src="www/bootstrap-switch.min.js"></script>
+    <script src="www/sweetalert2.min.js"></script>
     <script src="www/scripts.js"></script>
     <!-- END GLOBAL SCRIPTS -->
   </body>

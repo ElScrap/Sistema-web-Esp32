@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="www/theme.css" />
     <link rel="stylesheet" href="www/MoneAdmin.css" />
     <link rel="stylesheet" href="www/bootstrap-switch.css" />
+    <link rel="stylesheet" href="www/sweetalert2.min.css"/>
     <link rel="stylesheet" href="www/styles.css" />
     <link
       rel="stylesheet"
@@ -24,7 +25,7 @@
   </head>
   <!-- END  HEAD-->
   <!-- BEGIN BODY-->
-  <body class="padTop53">
+  <body class="padTop53" onload="visualizar();">
     <!-- MAIN WRAPPER -->
     <div id="wrap">
       <!-- HEADER SECTION -->
@@ -145,16 +146,25 @@
           <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading"><i class="icon-refresh"></i> Dar clic en el siguiente botón para restablecer todas las configuraciones a sus valores predeterminados del servidor.</div>
-                <div class="panel-body">
+                  <div class="panel-body">
                     <br>
-                    <button class="btn btn-danger btn-lg" onclick="restablecer()" id="btnrestaurar">
+                    <button class="btn btn-danger btn-lg" onclick="restablecer();" id="btn">
                         <i class="icon-refresh icon-white"></i> Restablecer
                     </button>
+                    <div id="visualizar">
+                      <br>
+                      <h3>Restableciendo en <span id="time" class="text-primary"> -- </span> segundos, <span class="text-danger">¡NO apague el Dispositivo!</span></h3>
+                        <div class="progress progress-striped active">
+                          <div class="progress-bar progress-bar-danger" id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="label label-default" id="pregressvalue"></span>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-        </div>
-      </div>
+          </div>
       <!--END PAGE CONTENT -->
       <!-- RIGHT STRIP  SECTION -->
       <div id="right">
@@ -191,6 +201,7 @@
     <script src="www/bootstrap.min.js"></script>
     <script src="www/modernizr-2.6.2.min.js"></script>
     <script src="www/bootstrap-switch.min.js"></script>
+    <script src="www/sweetalert2.min.js"></script>
     <script src="www/scripts.js"></script>
     <!-- END GLOBAL SCRIPTS -->
   </body>

@@ -64,37 +64,10 @@ void callback(char *topic, byte *payload, unsigned int length)
     mqttRX();
   }
   mensaje.trim();
-  DynamicJsonDocument jsonDoc(300);
-  deserializeJson(jsonDoc, mensaje);
-  // TODO Highlight rEALIZAR manejo de acciones al llegar a un dato
-  if (jsonDoc["RELAY1"] == "on")
-  {
-    ledEncendido(RELAY1);
-    Relay01_status = HIGH;
-    settingsSaveRelays();
-  }
-  else if (jsonDoc["RELAY1"] == "off")
-  {
-    ledApagado(RELAY1);
-    Relay01_status = LOW;
-    settingsSaveRelays();
-  }
-  else if (jsonDoc["RELAY2"] == "on")
-  {
-    ledEncendido(RELAY2);
-    Relay02_status = HIGH;
-    settingsSaveRelays();
-  }
-  else if (jsonDoc["RELAY2"] == "off")
-  {
-    ledApagado(RELAY2);
-    Relay02_status = LOW;
-    settingsSaveRelays();
-  }
+  OnOffRelays(mensaje);
 
   log("Info: Topico -->" + str_topic);
   log("Info: Mensaje -->" + mensaje);
-  serializeJsonPretty(jsonDoc, Serial);
 }
 // -------------------------------------------------------------------
 // Manejo de los Mensajes Salientes
